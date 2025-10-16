@@ -43,7 +43,7 @@ INSERT INTO CONTROL_ID_TABLAS(NOMBRE_CAMPO_ID_TABLAS, ULTIMO_ID_TABLAS) VALUES (
 
 USE [bdFactura]
 GO
-/****** Object:  StoredProcedure [dbo].[sp_registrar_factura]    Script Date: 16/10/2025 0:12:23 ******/
+/****** Object:  StoredProcedure [dbo].[sp_registrar_factura]    Script Date: 16/10/2025 3:43:45 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -61,65 +61,56 @@ ALTER PROCEDURE [dbo].[sp_registrar_factura]
 AS
 BEGIN
     SET NOCOUNT ON;
-	BEGIN TRY		--Inicio de control de errores
-    BEGIN TRAN	--Inicio del control de transacciones
 
-		DECLARE @fac_numeroChar VARCHAR(20),
-				@id_cliente INT,
-				@fac_numeroInt INT;
+    BEGIN TRY
+        BEGIN TRAN;
 
-		-- Obtener el ID del cliente
-		SELECT @id_cliente = cli_id
-		FROM Cliente
-		WHERE cli_cedula = @cliente_cedula;
+        DECLARE @fac_numeroChar VARCHAR(20),
+                @id_cliente INT,
+                @fac_numeroInt INT;
 
-		SELECT @fac_numeroInt = dbo.f_genera_nueva_id('fac_numero');
-		SELECT @fac_numeroChar = RIGHT('00000000' + CAST(@fac_numeroInt AS VARCHAR(8)), 8);
+        SELECT @id_cliente = cli_id
+        FROM Cliente
+        WHERE cli_cedula = @cliente_cedula;
 
-		-- Insertar la factura
-		INSERT INTO Factura (
-			fac_numero,
-			fac_fecha,
-			cli_id,
-			fac_subtotal,
-			fac_subtotalcero,
-			fac_iva,
-			fac_descuento,
-			fac_total,
-			aud_usr_id_crea,
-			aud_mac_crea,
-			aud_fecha_creacion,
-			aud_hora_creacion,
-			fac_estado
-		)
-		VALUES (
-			@fac_numeroChar,
-			@fecha,
-			@id_cliente,
-			@subTotal,
-			@subTotalCero,
-			@iva,
-			@descuento,
-			@total,
-			@usr_creador,
-			@usr_macCreador,
-			CAST(GETDATE() AS DATE),
-			CAST(GETDATE() AS TIME),
-			'A'
-		);
-		UPDATE CONTROL_ID_TABLAS 
-		SET ULTIMO_ID_TABLAS = @fac_numeroInt 
-		WHERE NOMBRE_CAMPO_ID_TABLAS = 'fac_numero';
+        IF @id_cliente IS NULL
+        BEGIN
+            THROW 50001, 'Cliente no existe', 1;
+        END
 
-		--devolver el numero de factura
-		SELECT @fac_numeroChar AS fac_numero;
-			IF @@TRANCOUNT > 0
-	  COMMIT	--Graba los datos permanentemente
-  END TRY
-  BEGIN CATCH	--Inicio del bloque en caso de un error en el try
-    IF @@TRANCOUNT > 0
-	  ROLLBACK	--Reversa las afectaciones de todas las tablas que 
-				--estuvieron presentes luego del BEGIN TRY
+        SELECT @fac_numeroInt = dbo.f_genera_nueva_id('fac_numero');
+        SELECT @fac_numeroChar = RIGHT('00000000' + CAST(@fac_numeroInt AS VARCHAR(8)), 8);
 
-	  END CATCH
-END;
+        INSERT INTO Factura (
+            fac_numero, fac_fecha, cli_id,
+            fac_subtotal, fac_subtotalcero, fac_iva, fac_descuento, fac_total,
+            aud_usr_id_crea, aud_mac_crea,
+            aud_fecha_creacion, aud_hora_creacion,
+            fac_estado
+        )
+        VALUES (
+            @fac_numeroChar, @fecha, @id_cliente,
+            @subTotal, @subTotalCero, @iva, @descuento, @total,
+            @usr_creador, @usr_macCreador,
+            CAST(GETDATE() AS DATE), CAST(GETDATE() AS TIME),
+            'A'
+        );
+
+        UPDATE CONTROL_ID_TABLAS 
+        SET ULTIMO_ID_TABLAS = @fac_numeroInt 
+        WHERE NOMBRE_CAMPO_ID_TABLAS = 'fac_numero';
+
+        COMMIT TRAN;
+
+        -- devolver el número de factura
+        SELECT @fac_numeroChar AS fac_numero;
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0
+            ROLLBACK TRAN;
+
+        DECLARE @ErrMsg NVARCHAR(4000), @ErrSeverity INT;
+        SELECT @ErrMsg = ERROR_MESSAGE(), @ErrSeverity = ERROR_SEVERITY();
+        RAISERROR(@ErrMsg, @ErrSeverity, 1);
+    END CATCH
+END
