@@ -1,0 +1,125 @@
+USE [bdFactura]
+GO
+
+/****** Object:  Table [dbo].[CONTROL_ID_TABLAS]    Script Date: 16/10/2025 0:23:45 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CONTROL_ID_TABLAS](
+	[NOMBRE_CAMPO_ID_TABLAS] [nvarchar](50) NOT NULL,
+	[ULTIMO_ID_TABLAS] [int] NOT NULL
+) ON [PRIMARY]
+GO
+
+USE [bdFactura]
+GO
+
+/****** Object:  UserDefinedFunction [dbo].[f_genera_nueva_id]    Script Date: 16/10/2025 0:24:15 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE FUNCTION [dbo].[f_genera_nueva_id] (@p_nombre_campo_id_tabla NVARCHAR (50))
+	RETURNS INT
+AS
+BEGIN
+	DECLARE @v_nuevo_id INT
+	SELECT @v_nuevo_id = ULTIMO_ID_TABLAS
+	FROM CONTROL_ID_TABLAS
+	WHERE NOMBRE_CAMPO_ID_TABLAS = @p_nombre_campo_id_tabla
+
+	SET @v_nuevo_id = @v_nuevo_id + 1
+	RETURN @v_nuevo_id
+END
+GO
+--ejecutar una vez
+INSERT INTO CONTROL_ID_TABLAS(NOMBRE_CAMPO_ID_TABLAS, ULTIMO_ID_TABLAS) VALUES ('fac_numero', 1);
+
+
+USE [bdFactura]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_registrar_factura]    Script Date: 16/10/2025 0:12:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[sp_registrar_factura]
+    @fecha DATE,
+    @cliente_cedula VARCHAR(13),
+    @subTotal DECIMAL(18,2),
+    @subTotalCero DECIMAL(18,2),
+    @iva DECIMAL(18,2),
+    @descuento DECIMAL(18,2),
+    @total DECIMAL(18,2),
+    @usr_creador INT,
+    @usr_macCreador VARCHAR(20)
+AS
+BEGIN
+    SET NOCOUNT ON;
+	BEGIN TRY		--Inicio de control de errores
+    BEGIN TRAN	--Inicio del control de transacciones
+
+		DECLARE @fac_numeroChar VARCHAR(20),
+				@id_cliente INT,
+				@fac_numeroInt INT;
+
+		-- Obtener el ID del cliente
+		SELECT @id_cliente = cli_id
+		FROM Cliente
+		WHERE cli_cedula = @cliente_cedula;
+
+		SELECT @fac_numeroInt = dbo.f_genera_nueva_id('fac_numero');
+		SELECT @fac_numeroChar = RIGHT('00000000' + CAST(@fac_numeroInt AS VARCHAR(8)), 8);
+
+		-- Insertar la factura
+		INSERT INTO Factura (
+			fac_numero,
+			fac_fecha,
+			cli_id,
+			fac_subtotal,
+			fac_subtotalcero,
+			fac_iva,
+			fac_descuento,
+			fac_total,
+			aud_usr_id_crea,
+			aud_mac_crea,
+			aud_fecha_creacion,
+			aud_hora_creacion,
+			fac_estado
+		)
+		VALUES (
+			@fac_numeroChar,
+			@fecha,
+			@id_cliente,
+			@subTotal,
+			@subTotalCero,
+			@iva,
+			@descuento,
+			@total,
+			@usr_creador,
+			@usr_macCreador,
+			CAST(GETDATE() AS DATE),
+			CAST(GETDATE() AS TIME),
+			'A'
+		);
+		UPDATE CONTROL_ID_TABLAS 
+		SET ULTIMO_ID_TABLAS = @fac_numeroInt 
+		WHERE NOMBRE_CAMPO_ID_TABLAS = 'fac_numero';
+
+		--devolver el numero de factura
+		SELECT @fac_numeroChar AS fac_numero;
+			IF @@TRANCOUNT > 0
+	  COMMIT	--Graba los datos permanentemente
+  END TRY
+  BEGIN CATCH	--Inicio del bloque en caso de un error en el try
+    IF @@TRANCOUNT > 0
+	  ROLLBACK	--Reversa las afectaciones de todas las tablas que 
+				--estuvieron presentes luego del BEGIN TRY
+
+	  END CATCH
+END;
