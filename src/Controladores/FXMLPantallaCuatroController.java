@@ -307,6 +307,30 @@ public class FXMLPantallaCuatroController implements Initializable {
                         this.check_aplicarIva.setSelected(false);
                     }
                     this.txt_estado.setText(productos.get(0).getProd_estado());
+                    // ==== RECUPERAR IMAGEN ====
+                    try {
+                        General.BD conexion = new General.BD();
+                        if(conexion.conectarBD()) {
+                            String sqlImagen = "SELECT pod_imagen FROM Producto WHERE prod_id = " + id;
+                            java.sql.Statement stmt = conexion.getConexion().createStatement();
+                            java.sql.ResultSet rs = stmt.executeQuery(sqlImagen);
+                            if(rs.next()) {
+                                byte[] imgBytes = rs.getBytes("pod_imagen");
+                                if(imgBytes != null && imgBytes.length > 0) {
+                                    Image img = new Image(new java.io.ByteArrayInputStream(imgBytes));
+                                    img_producto.setImage(img);
+                                } else {
+                                    img_producto.setImage(null); // o una imagen por defecto
+                                }
+                            }
+                            rs.close();
+                            stmt.close();
+                            conexion.desconectarBD();
+                        }
+                    } catch(Exception ex){
+                        General.Mod_general.fun_mensajeError("Error al cargar imagen: " + ex.getMessage());
+                    }
+                    // ==== FIN IMAGEN ====
                 }
             }else{
                 this.fun_limpiar();
