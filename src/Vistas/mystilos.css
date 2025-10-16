@@ -1,0 +1,259 @@
+
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 28 ago 2025, 7:49:56 a. m.
+    Author     : Alejandro
+*/
+
+/* En tu archivo CSS */
+
+/* Fondos */
+.fondoPrincipal {
+    -fx-background-color: #FFF2E6;
+    -fx-border-color: #A63C06;
+    -fx-border-width: 1px;
+    /*-fx-padding: 10px;*/
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+}
+.fondo {
+    -fx-background-color: #FFB997;
+    -fx-border-color: #A63C06;
+    -fx-border-width: 1px;
+    /*-fx-padding: 20px;*/
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+}
+
+/* Paneles */
+.anchorPaneSuperior {
+    -fx-background-color: #A63C06;
+    -fx-border-color: #732002;
+    -fx-border-width: 0 0 2px 0;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 1);
+}
+.anchorPaneSuperior Label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+}
+.anchorPaneInferior {
+    -fx-background-color: #A63C06;
+    -fx-border-color: #732002;
+    -fx-border-width: 2px 0 0 0;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 1);
+}
+.anchorPaneMedio {
+    -fx-background-color: #A63C06;
+    -fx-border-color: #732002;
+    -fx-border-width: 2px 0 2px 0;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 1);
+}
+
+/* Menú */
+.menu-bar {
+    -fx-background-color: #A63C06;
+    -fx-border-color: #732002;
+    -fx-border-width: 0 0 2px 0;
+}
+.menu-bar .label {
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
+/* Imagenes */
+.btnNuevo { -fx-background-image: url("/Iconos/add-post.png"); }
+.btnCancelar { -fx-background-image: url("/Iconos/cancel.png"); }
+.btnCargar { -fx-background-image: url("/Iconos/add-post.png"); }
+.btnGrabar { -fx-background-image: url("/Iconos/write.png"); }
+.btnAnular { -fx-background-image: url("/Iconos/file.png"); }
+.btnImprimir { -fx-background-image: url("/Iconos/printer.png"); }
+.btnCliente { -fx-background-image: url("/Iconos/client.png"); }
+.btnEmpresa { -fx-background-image: url("/Iconos/office-building.png"); }
+.btnUsuario { -fx-background-image: url("/Iconos/add-user.png"); }
+.btnProducto { -fx-background-image: url("/Iconos/product-selling.png"); }
+.btnFactura { -fx-background-image: url("/Iconos/invoice.png"); }
+
+/* Botones */
+.btnNuevo, .btnCancelar, .btnGrabar, .btnImprimir, .btnAnular, .btnCargar {
+    -fx-background-size: 40%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left center;
+    -fx-padding: 7px 2px 7px 35px;
+    -fx-text-fill: #2E1503;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-color: #FFB997;
+    -fx-min-width: 55px;
+    -fx-min-height: 40px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+/* Detalles */
+.btnNuevo:hover, .btnCancelar:hover, .btnGrabar:hover, .btnImprimir:hover, .btnAnular:hover, .btnCargar:hover{
+    -fx-background-color: #FFDACC;
+    -fx-effect: dropshadow(gaussian, rgba(255,255,255,0.8), 10, 0.5, 0, 0);
+    -fx-border-color: #FFB997;
+    -fx-border-width: 2px;
+}
+
+/* Botón registros*/
+.btnCliente, .btnEmpresa, .btnProducto, .btnUsuario, .btnFactura {
+    -fx-background-size: 25px 30px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center 5px;
+    -fx-padding: 35px 2px 7px 2px;
+    -fx-text-fill: #2E1503;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-background-color: #FFB997;
+    -fx-min-width: 55px;
+    -fx-min-height: 80px;
+}
+
+/* Detalles */
+.btnCliente:hover, .btnEmpresa:hover, .btnProducto:hover, .btnUsuario:hover, .btnFactura:hover {
+    -fx-background-color: #FFDACC;
+    -fx-effect: dropshadow(gaussian, rgba(255,255,255,0.8), 10, 0.5, 0, 0);
+    -fx-border-color: #FFB997;
+    -fx-border-width: 2px;
+}
+
+/* Campos */
+.text-field, .text-area, .password-field {
+    -fx-background-color: #FFF8F2;   /* beige claro */
+    -fx-text-fill: #2E1503;          /* casi negro */
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-color: #A63C06;       /* borde vino */
+    -fx-border-width: 1px;
+    -fx-padding: 5px 10px 5px 10px;
+    -fx-font-size: 13px;
+}
+/* Detalles */
+.text-field:focused, .text-area:focused , .password-field:focused {
+    -fx-border-color: #FFB997;       /* acento durazno */
+    -fx-effect: dropshadow(gaussian, rgba(255,180,150,0.6), 8, 0.4, 0, 0);
+}
+
+/* Tablas */
+.table-view {
+    -fx-background-color: #FFF2E6;
+    -fx-border-color: #A63C06;
+    -fx-border-width: 1px;
+    -fx-table-cell-border-color: #FFDACC;
+    -fx-padding: 5px;
+    -fx-font-size: 13px;
+}
+
+/* Detalles */
+.table-view .column-header-background {
+    -fx-background-color: #A63C06;
+}
+.table-view .label {
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
+/* Panel lateral */
+.accordion {
+    -fx-background-color: #FFF2E6;
+    -fx-border-color: #A63C06;
+    -fx-border-width: 1px;
+}
+.titled-pane {
+    -fx-background-color: #FFB997;
+    -fx-text-fill: #2E1503;
+    -fx-font-weight: bold;
+}
+.titled-pane > .title {
+    -fx-background-color: #A63C06;
+    -fx-text-fill:white;
+}
+
+/* Alertas */
+.alert-info {
+    -fx-background-color: #DFF6E0;
+    -fx-border-color: #5CB85C;
+    -fx-text-fill: #2E7D32;
+}
+.alert-error {
+    -fx-background-color: #F8D7DA;
+    -fx-border-color: #C9302C;
+    -fx-text-fill: #842029;
+}
+/* Fondo principal */
+#fondoLogin {
+    -fx-background-color: linear-gradient(to bottom, #732002, #A63C06, #FFB997);
+}
+/* Panel central */
+#pane {
+    -fx-background-color: rgba(255, 242, 230, 0.75); /* beige translúcido */
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 12, 0.3, 0, 4);
+}
+/* Título Login */
+.tituloLogin {
+    -fx-text-fill: #A63C06;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+}
+/* Botón login */
+#btn_login {
+    -fx-background-color: #A63C06;   /* vino */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-pref-height: 35px;
+    -fx-pref-width: 120px;
+    -fx-cursor: hand;
+}
+#btn_login:hover {
+    -fx-background-color: #732002;   /* más oscuro */
+    -fx-text-fill: #FFB997;          /* contraste */
+}
+.labelLogin, .tituloLogin {
+    -fx-background-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-background-radius: 0 !important;
+
+    -fx-border-color: transparent !important;
+    -fx-border-width: 0 !important;
+    -fx-border-insets: 0 !important;
+    -fx-border-radius: 0 !important;
+
+    -fx-padding: 0 !important;  /* quita cualquier margen interno extraño */
+}
+/* Estilo tipográfico de los labels (Usuario / Contraseña) */
+.labelLogin {
+    -fx-text-fill: #5C1E00 !important;           /* marrón profundo de tu paleta */
+    -fx-font-size: 14px !important;
+    -fx-font-weight: bold !important;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif !important;
+}
+/* Aplica espaciado a tu VBox */
+.vbox {
+    -fx-spacing: 5px; /* espacio entre elementos internos */
+}
+/* Márgenes de los nodos internos usando padding */
+.vbox > Label, 
+.vbox > TextField, 
+.vbox > PasswordField {
+    -fx-padding: 5px 0 5px 0; /* top, right, bottom, left */
+}

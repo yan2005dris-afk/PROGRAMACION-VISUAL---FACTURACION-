@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane id="AnchorPane" fx:id="ap_clientes" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.FXMLClientesController">
+   <children>
+      <Pane fx:id="pane_inferior" layoutY="344.0" prefHeight="75.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Button fx:id="btn_cancelar" layoutX="465.0" layoutY="6.0" mnemonicParsing="false" onAction="#acc_btncancelar" prefHeight="63.0" prefWidth="110.0" text="Cancelar" />
+            <Button fx:id="btn_nuevo" layoutX="344.0" layoutY="6.0" mnemonicParsing="false" onAction="#acc_btnnuevo" prefHeight="63.0" prefWidth="110.0" text="Nuevo" />
+         </children>
+      </Pane>
+      <Pane fx:id="pane_superior" prefHeight="75.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="lb_buscarClientes" layoutX="48.0" layoutY="29.0" text="Buscar Cliente:" />
+            <TextField fx:id="txt_buscar" layoutX="147.0" layoutY="25.0" onKeyPressed="#acc_buscar" prefHeight="25.0" prefWidth="296.0" />
+            <RadioButton fx:id="rb_apellido" layoutX="466.0" layoutY="16.0" mnemonicParsing="false" onAction="#acc_rbApellido" text="Por Apellido" />
+            <RadioButton fx:id="rb_cedula" layoutX="466.0" layoutY="41.0" mnemonicParsing="false" onAction="#acc_rbCedula" text="Por Cédula" />
+         </children>
+      </Pane>
+      <TableView fx:id="tbl_cliente" layoutX="62.0" layoutY="100.0" onMouseClicked="#acc_clickedMouse" prefHeight="200.0" prefWidth="476.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="100.0">
+        <columns>
+          <TableColumn fx:id="col_cedula" prefWidth="91.99999845027924" text="CÉDULA" />
+            <TableColumn fx:id="col_apellidos" prefWidth="142.40003204345703" text="APELLIDOS" />
+          <TableColumn fx:id="col_nombres" prefWidth="136.79998779296875" text="NOMBRES" />
+            <TableColumn fx:id="col_telefono" prefWidth="102.4000244140625" text="TELÉFONO" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

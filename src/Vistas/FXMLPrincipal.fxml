@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.FXMLPrincipalController">
+   <bottom>
+      <Pane prefHeight="35.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="lb_usuario" layoutX="30.0" layoutY="10.0" text="Usuario:">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="lb_nombreUsuario" layoutX="101.0" layoutY="11.0" text="Andy Alejandro" />
+            <Label fx:id="lb_fecha" layoutX="206.0" layoutY="10.0" text="Fecha:">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="lb_fechaActual" layoutX="277.0" layoutY="11.0" text="14/08/2025" />
+            <Label fx:id="lb_version" layoutX="370.0" layoutY="10.0" text="Versión:">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="lb_versionActual" layoutX="441.0" layoutY="11.0" text="0.1.0" />
+            <Label fx:id="lb_hora" layoutX="490.0" layoutY="8.0" text="Hora:">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="lb_horaActual" layoutX="561.0" layoutY="9.0" text="08:41" />
+         </children>
+      </Pane>
+   </bottom>
+   <top>
+      <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
+        <menus>
+          <Menu fx:id="menu_administrador" mnemonicParsing="false" text="Administrador">
+            <items>
+              <MenuItem fx:id="menu_pantallaUno" mnemonicParsing="false" onAction="#acc_menupantallaUno" text="Registro de Clientes" />
+                  <MenuItem fx:id="menu_pantallaDos" mnemonicParsing="false" onAction="#acc_menupantallaDos" text="Registro de Empresas" />
+                  <MenuItem fx:id="menu_pantallaTres" mnemonicParsing="false" onAction="#acc_menupantallaTres" text="Registro de Usuarios" />
+                  <MenuItem fx:id="menu_pantallaCuatro" mnemonicParsing="false" onAction="#acc_menupantallaCuatro" text="Registro de Productos" />
+            </items>
+          </Menu>
+          <Menu fx:id="menu_procesos" mnemonicParsing="false" text="Procesos">
+            <items>
+              <MenuItem fx:id="menu_pantallaCinco" mnemonicParsing="false" onAction="#acc_menupantallaCinco" text="Facturar" />
+            </items>
+          </Menu>
+          <Menu fx:id="menu_reportes" mnemonicParsing="false" text="Reportes">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+            <Menu fx:id="menu_opciones" mnemonicParsing="false" text="Opciones">
+               <items>
+                  <MenuItem fx:id="menu_esp" mnemonicParsing="false" onAction="#acc_menuEsp" text="Español" />
+                  <MenuItem fx:id="menu_eng" mnemonicParsing="false" onAction="#acc_menuIng" text="English" />
+                  <MenuItem fx:id="menu_sesion" mnemonicParsing="false" onAction="#acc_menuSesion" text="Cerrar Sesion" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <left>
+      <Accordion fx:id="lateralAcordion" prefHeight="339.0" prefWidth="98.0" BorderPane.alignment="CENTER">
+        <panes>
+          <TitledPane fx:id="titledAdministracion" animated="false" text="Administración">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btn_pantallaUno" contentDisplay="TOP" layoutX="22.0" layoutY="14.0" mnemonicParsing="false" onAction="#acc_btnpantallaUno" prefHeight="75.0" prefWidth="75.0" text="Registro&#10;Clientes" textAlignment="CENTER" />
+                        <Button fx:id="btn_pantallaDos" contentDisplay="TOP" layoutX="22.0" layoutY="100.0" mnemonicParsing="false" onAction="#acc_btnpantallaDos" prefHeight="75.0" prefWidth="75.0" text="Registro&#10;Empresas" textAlignment="CENTER" />
+                        <Button fx:id="btn_pantallaTres" contentDisplay="TOP" layoutX="22.0" layoutY="186.0" mnemonicParsing="false" onAction="#acc_btnpantallaTres" prefHeight="75.0" prefWidth="75.0" text="Registro&#10;Usuarios" textAlignment="CENTER" />
+                        <Button fx:id="btn_pantallaCuarto" contentDisplay="TOP" layoutX="22.0" layoutY="272.0" mnemonicParsing="false" onAction="#acc_btnpantallaCuatro" prefHeight="75.0" prefWidth="75.0" text="Registro&#10;Productos" textAlignment="CENTER" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+          <TitledPane fx:id="titledProcesos" animated="false" text="Procesos">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btn_pantallaCinco" contentDisplay="TOP" layoutX="18.0" layoutY="16.0" mnemonicParsing="false" onAction="#acc_btnpantallaCinco" prefHeight="75.0" prefWidth="75.0" text="Facturar" textAlignment="CENTER" />
+                     </children></AnchorPane>
+            </content>
+          </TitledPane>
+          <TitledPane fx:id="titledReportes" animated="false" text="Reportes">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </TitledPane>
+        </panes>
+      </Accordion>
+   </left>
+   <center>
+        <VBox fx:id="dataPane" alignment="CENTER" fillWidth="false" prefHeight="Infinity" prefWidth="Infinity" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
