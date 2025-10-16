@@ -1,1 +1,7 @@
-mis aportes xd
+Version 1.0.2 
+se implemento el paquete Facturacion.util
+este contiene las clases de 
+*  ClaveAccesoGenerator: Generar la clave de Acceso de 49 digitos basandose en los datos tributarios.
+*  DateFormatter: Formato requerido por el SRI para la etiqueta fechaEmision.
+*  Modulo11Calculator: Calcula el digito verificador aplciando el algoritmo Módulo 11.
+*  XMLBuilder: Convierte el objeto Factura a una cadena XML con codificación UTF-8.
